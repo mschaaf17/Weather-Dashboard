@@ -19,26 +19,17 @@
         <div class="card">
           <h3 class="card-header">Search for a City</h3>
           <form id="user-form" class="card-body">
-            <label class="form-label" for="searches"></label>
-            <input
-              name="city"
-              id="city"
-              value="london"
-              type="text"
-              autofocus="true"
-              class="form-input"
-            />
+            <input name="city" id="city-name" placeholder ="City Name" type="text" autofocus="true" class="form-input"/>
             <div>
             <button type="submit" id="submit">Search</button>
-            </div>
+            <span class="msg"></span>
+          </div>
           </form>
         </div>
 
         <div class="card">
-          <div class="card-body">
-            <ul>
-                <li>input from javascript with local storage perhaps a div instead</li>
-            </ul>
+          <div id= 'cityListContainer' class="card-body">
+          
           </div>
         </div>
       </div>
