@@ -2,11 +2,21 @@
 //setting up the url for current day
 var submitBtn = document.getElementById('submit');
 var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
-var apiKey = '&appid=e999a470cbbde7da1e47653e4e675d9d'; 
+var apiKey = '&appid=cf161441982aff595bf2e110785325f0'; 
 var units = '&units=imperial';
 var daily = '&daily';
 //var invalid = document.querySelector('.msg');
 //https://api.openweathermap.org/data/2.5/onecall?lat=40.6669&lon=-111.888&exclude=hourly,minutely&appid=e999a470cbbde7da1e47653e4e675d9d
+
+var cityListContainer = document.getElementById('cityListContainer')
+  Object.keys(localStorage).forEach(function(key){ 
+  console.log(localStorage.getItem(key))
+   var cityButtons= document.createElement('button')
+  cityButtons.innerHTML= JSON.parse(localStorage.getItem(key))
+  cityListContainer.append(cityButtons)
+})
+
+ //document.querySelector('#cityListContainer').innerHTML = JSON.parse(localStorage.getItem('citiesSearched'))
 
 //make button to update url with value
 submitBtn.addEventListener("click", function(event) {
@@ -16,19 +26,20 @@ submitBtn.addEventListener("click", function(event) {
   console.log(currentUrl)
 
 
-//everytime its clicked it repeats the local storage!
+//everytime its clicked it repeats the local storage
   //set up local storage
 var citiesSearched = !!localStorage.getItem('citiesSearched') ? JSON.parse(localStorage.getItem('citiesSearched')) : [];
 citiesSearched.push(inputEl);
 localStorage.setItem('citiesSearched', JSON.stringify(citiesSearched));
 
+
 //display local storage ---stay after refresh
 for(i=0; i<citiesSearched.length; i++) {
   var cityListContainer = document.querySelector('#cityListContainer');
-  var inputEl = document.querySelector('#city-name').value.trim();
+  //var inputEl = document.querySelector('#city-name').value.trim();
   var cityList = document.createElement('p');
   cityList.classList.add('search-history')
-  cityList.textContent = citiesSearched[i]
+  cityList.textContent = citiesSearched[0]
   cityListContainer.appendChild(cityList) 
   //once clicked the submitBtn function has to run again so this can't be in it!
   cityList.addEventListener('click', function(e) {
@@ -92,6 +103,10 @@ var displayCurrentWeather = function() {
   })
   
 }
+
+
+
+
 
 displayCurrentWeather();
 

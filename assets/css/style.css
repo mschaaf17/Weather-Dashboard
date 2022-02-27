@@ -16,7 +16,7 @@
     
 }
 
- #submit {
+ #submit, button {
      padding: 10px 65px 10px 65px;
      
      background-color: lightskyblue;

@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
   </head>
 
-  <body class="flex-column">
+  <body>
     <header class="hero">
       <h1 class="app-title">Weather Dashboard</h1>
     </header>
 
-    <main class="flex-row justify-space-between">
-      <div class="col-12 col-md-4">
+    <main class="row p-5">
+      <div class="col-3 col-md-4">
         <div class="card">
-          <h3 class="card-header">Search for a City</h3>
+          <h3 class="card-header">Search for a City:</h3>
           <form id="user-form" class="card-body">
             <input name="city" id="city-name" placeholder ="City Name" type="text" autofocus="true" class="form-input"/>
            </br>
@@ -31,7 +31,7 @@
           </div>
       </div>
       
-      <div class="col-12 col-md-8">
+      <div class="col-9 col-md-6">
         <div id="current-day-container" class="border">
           <h2 id="name"></h2>
           <h3 id ='date'></h3> 
@@ -44,7 +44,7 @@
 
 
         <h3>5-Day forecast:</h3>
-        <div id="future-weather">yes</div>
+        <div id="future-weather" class = 'flex-row justify-space-between'>yes</div>
       </div>
     </main>
 
