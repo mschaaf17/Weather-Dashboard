@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!--bootstrap???-->
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
   </head>
 
-  <body class="flex-column min-100-vh">
+  <body class="flex-column">
     <header class="hero">
       <h1 class="app-title">Weather Dashboard</h1>
     </header>
@@ -20,27 +21,20 @@
           <h3 class="card-header">Search for a City</h3>
           <form id="user-form" class="card-body">
             <input name="city" id="city-name" placeholder ="City Name" type="text" autofocus="true" class="form-input"/>
-            <div>
+           </br>
             <button type="submit" id="submit">Search</button>
             <span class="msg"></span>
-          </div>
           </form>
         </div>
-
-        <div class="card">
-          <div id= 'cityListContainer' class="card-body">
-          
+          <div class="card">
+            <div id= 'cityListContainer' class="card-body"></div>
           </div>
-        </div>
       </div>
-
+      
       <div class="col-12 col-md-8">
-        <h2 class="subtitle">
-          this should be a div that will be displayed from javascript: <span id="repo-search-term"></span>
-        </h2>
-        <div id="repos-container" class="list-group"></div>
+        <div id="current-day-container" class="border">stuff from today</div>
+        <div>5 day forecast</div>
       </div>
-      <div>5 day forecast</div>
     </main>
 
     <script src="./assets/js/script.js"></script>

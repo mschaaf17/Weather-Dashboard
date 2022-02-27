@@ -1,0 +1,45 @@
+.app-title {
+    color: white;
+    background: linear-gradient(to right,blue, darkblue);
+    text-align: center;
+    font-weight: bold;
+}
+
+.card-header {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+
+}
+
+#city-name {
+    border-radius: 5px;
+    
+    
+}
+
+ #submit {
+     padding: 10px 65px 10px 65px;
+     
+     background-color: lightskyblue;
+     border-radius: 5px;
+     color: white;
+     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+     font-weight: bold;
+ }
+
+ #cityListContainer {
+    border-top: solid 2px;
+
+ }
+
+
+.border {
+    border: solid 1px ;
+}
+
+.search-history {
+border: lightgrey solid 1px;
+border-radius: 10px;
+text-align: center;
+background-color: lightgrey;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
