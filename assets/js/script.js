@@ -4,59 +4,37 @@ var submitBtn = document.getElementById('submit');
 var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
 var apiKey = '&appid=cf161441982aff595bf2e110785325f0'; 
 var units = '&units=imperial';
-var daily = '&daily';
+var currentWeather = document.getElementById('current-day-container')
+
+
 //var invalid = document.querySelector('.msg');
-//https://api.openweathermap.org/data/2.5/onecall?lat=40.6669&lon=-111.888&exclude=hourly,minutely&appid=e999a470cbbde7da1e47653e4e675d9d
+//https://api.openweathermap.org/data/2.5/onecall?lat=40.6669&lon=-111.888&exclude=hourly,minutely&appid=cf161441982aff595bf2e110785325f0
+var citiesSearched = !!localStorage.getItem('citiesSearched') ? JSON.parse(localStorage.getItem('citiesSearched')) : [];
+var cityListContainer = document.getElementById('cityListContainer');
 
-var cityListContainer = document.getElementById('cityListContainer')
-  Object.keys(localStorage).forEach(function(key){ 
-  console.log(localStorage.getItem(key))
-   var cityButtons= document.createElement('button')
-  cityButtons.innerHTML= JSON.parse(localStorage.getItem(key))
+//creates a button for each city searched
+for(i=0; i<citiesSearched.length; i++) {
+  var cityButtons= document.createElement('button');
+  cityButtons.textContent = citiesSearched[i];
   cityListContainer.append(cityButtons)
+  var cityButtonsClick = cityButtons
+  cityButtonsClick.addEventListener('click', function(event){
+  console.log(citiesSearched[i]);
 })
-
- //document.querySelector('#cityListContainer').innerHTML = JSON.parse(localStorage.getItem('citiesSearched'))
+}
 
 //make button to update url with value
 submitBtn.addEventListener("click", function(event) {
   var inputEl = document.querySelector('#city-name').value.trim();
   event.preventDefault(); 
-  var currentUrl = api + inputEl + daily + apiKey + units;
+  var currentUrl = api + inputEl + apiKey + units;
   console.log(currentUrl)
+  citiesSearched.push(inputEl);
+  localStorage.setItem('citiesSearched', JSON.stringify(citiesSearched));
 
-
-//everytime its clicked it repeats the local storage
-  //set up local storage
-var citiesSearched = !!localStorage.getItem('citiesSearched') ? JSON.parse(localStorage.getItem('citiesSearched')) : [];
-citiesSearched.push(inputEl);
-localStorage.setItem('citiesSearched', JSON.stringify(citiesSearched));
-
-
-//display local storage ---stay after refresh
-for(i=0; i<citiesSearched.length; i++) {
-  var cityListContainer = document.querySelector('#cityListContainer');
-  //var inputEl = document.querySelector('#city-name').value.trim();
-  var cityList = document.createElement('p');
-  cityList.classList.add('search-history')
-  cityList.textContent = citiesSearched[0]
-  cityListContainer.appendChild(cityList) 
-  //once clicked the submitBtn function has to run again so this can't be in it!
-  cityList.addEventListener('click', function(e) {
-    console.log('clicked')
-    if('clicked') {
-      //find a way to make the click to match the value
-      return displayCurrentWeather();
-    }
-  }) 
-  }
-
-//if the local storage is in the submitBtn it works
 
 //function set up to retrieve information on a repeat click
 var displayCurrentWeather = function() {
-
-
 //fetch data to display on the page
   fetch(currentUrl) 
   .then(function(response) {
@@ -64,8 +42,9 @@ var displayCurrentWeather = function() {
     return response.json()
     .then(function(data) {
       console.log(data)
+      coordinates(data.coord.lat, data.coord.lon)
       //container for all info
-      var currentWeather = document.getElementById('current-day-container')
+      
       //name data
       var cityName = document.getElementById('name')
       cityName.textContent = data.name
@@ -91,12 +70,14 @@ var displayCurrentWeather = function() {
       dailyHumidity.textContent = 'Humidity: ' + data.main.humidity + '%'
       currentWeather.appendChild(dailyHumidity)
 
+      
+      
       //weather icon
       //var icon = document.createElement('img')
       var iconEl= document.getElementById('icon')
-      icon= data.weather[0].icon
+      var icon= data.weather[0].icon
       iconEl.src= 'http://openweathermap.org/img/wn/' + icon + '@2x.png'
-      iconEl.appendChild(icon)
+      //iconEl.appendChild(icon)
     
     })
   }
@@ -104,8 +85,44 @@ var displayCurrentWeather = function() {
   
 }
 
+var coordinates = function(lat, lon) {
+  var api2 =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}${apiKey}`
+  fetch(api2)
+  .then(function(res){
+    return res.json()
+  })
+.then(function(data) {
+  console.log(data)
+  //uv index---find this in open weather app
 
+  var uvEl= document.getElementById('uv');
+  var uvData = data.current.uvi;
+  uvEl.textContent = 'UV: ' + uvData;
+  currentWeather.appendChild(uvEl);
+  if(uvData > 0) {
+    uvEl.style.backgroundColor ='red';
+  } else if (uvData < 0) {
+    uvEl.style.backgroundColor = 'green';
+  };
+  if (uvData === 0) {
+    uvEl.style.backgroundColor = 'yellow'
+  };
+  var forecastTitle = document.getElementById('forecastTitle')
+  forecastTitle.textContent = '5-Day Forecast:';
+  var forecastEl = document.getElementsByClassName('forecast')
+  for(var i = 1; i <= 5; i++) {
+    var current = data.daily[i]
+    var forecastDate = document.querySelector('.forecastDate'+ i)
+    forecastDate.textContent = new Date(current.dt * 1000).toLocaleDateString()
+    var forecastTemp = document.querySelector('.forecastTemp' + i)
+    forecastTemp.textContent ='hello';
+    var forecastWind = document.querySelector('.forecastWind' + i)
+    var forecastHumidity = document.querySelector('.forecastHumidity'+ i)
+///append everything class container ---submit button!!!!!
+  }
 
+})
+}
 
 
 displayCurrentWeather();

@@ -18,7 +18,7 @@
 
  #submit, button {
      padding: 10px 65px 10px 65px;
-     
+     width: 100%;
      background-color: lightskyblue;
      border-radius: 5px;
      color: white;
@@ -44,7 +44,17 @@ background-color: lightgrey;
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-#future-weather {
+.red {
+    background-color:red;
+}
+
+.green {
+    background-color:green;
+}
+
+.forecast-card {
     background-color: navy;
+    font-weight: bold;
     color: white;
+    padding: 10px;
 }
