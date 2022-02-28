@@ -86,7 +86,7 @@ var displayCurrentWeather = function() {
 }
 
 var coordinates = function(lat, lon) {
-  var api2 =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}${apiKey}`
+  var api2 =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}${apiKey}&units=imperial`
   fetch(api2)
   .then(function(res){
     return res.json()
@@ -115,10 +115,11 @@ var coordinates = function(lat, lon) {
     var forecastDate = document.querySelector('.forecastDate'+ i)
     forecastDate.textContent = new Date(current.dt * 1000).toLocaleDateString()
     var forecastTemp = document.querySelector('.forecastTemp' + i)
-    forecastTemp.textContent ='hello';
+    forecastTemp.textContent ='Temp: ' + Math.round(current.temp.day) + String.fromCharCode(176) + ' F';
     var forecastWind = document.querySelector('.forecastWind' + i)
+   forecastWind.textContent= 'Wind: ' + current.wind_speed + ' MPH'
     var forecastHumidity = document.querySelector('.forecastHumidity'+ i)
-///append everything class container ---submit button!!!!!
+    forecastHumidity = 'Humidity: ' + current.humidity + '%'
   }
 
 })
