@@ -26,6 +26,10 @@
      font-weight: bold;
  }
 
+ button {
+     background-color: lightslategray;
+ }
+
  #cityListContainer {
     border-top: solid 2px;
 

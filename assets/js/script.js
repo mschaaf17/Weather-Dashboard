@@ -13,17 +13,27 @@ var citiesSearched = !!localStorage.getItem('citiesSearched') ? JSON.parse(local
 var cityListContainer = document.getElementById('cityListContainer');
 
 //creates a button for each city searched
+//onload = function recentSearches() {
+  //console.log('The Script will load now.');
 for(i=0; i<citiesSearched.length; i++) {
+  if (i===10) {
+    break;
+  }
   var cityButtons= document.createElement('button');
   cityButtons.textContent = citiesSearched[i];
   cityListContainer.append(cityButtons)
   var cityButtonsClick = cityButtons
   cityButtonsClick.addEventListener('click', function(event){
-  console.log(citiesSearched[i]);
+   //use this to replace url  https://www.youtube.com/watch?v=C9vsQkMu5gk   history.replaceState('yes', null, 'city=paris')
+    
+   console.log(history.length)
+  //console.log(citiesSearched.value);
 })
 }
+//}
 
 //make button to update url with value
+
 submitBtn.addEventListener("click", function(event) {
   var inputEl = document.querySelector('#city-name').value.trim();
   event.preventDefault(); 
@@ -73,11 +83,10 @@ var displayCurrentWeather = function() {
       
       
       //weather icon
-      //var icon = document.createElement('img')
       var iconEl= document.getElementById('icon')
       var icon= data.weather[0].icon
       iconEl.src= 'http://openweathermap.org/img/wn/' + icon + '@2x.png'
-      //iconEl.appendChild(icon)
+      
     
     })
   }
@@ -99,27 +108,33 @@ var coordinates = function(lat, lon) {
   var uvData = data.current.uvi;
   uvEl.textContent = 'UV: ' + uvData;
   currentWeather.appendChild(uvEl);
-  if(uvData > 0) {
+  if(uvData >= 6) {
     uvEl.style.backgroundColor ='red';
-  } else if (uvData < 0) {
+  } else if (uvData <= 2) {
     uvEl.style.backgroundColor = 'green';
   };
-  if (uvData === 0) {
+  if (uvData ===3 || uvData === 4 || uvData === 5) {
     uvEl.style.backgroundColor = 'yellow'
   };
   var forecastTitle = document.getElementById('forecastTitle')
   forecastTitle.textContent = '5-Day Forecast:';
   var forecastEl = document.getElementsByClassName('forecast')
+  //forecastEl.classList.add(".forecast-card")
   for(var i = 1; i <= 5; i++) {
     var current = data.daily[i]
     var forecastDate = document.querySelector('.forecastDate'+ i)
     forecastDate.textContent = new Date(current.dt * 1000).toLocaleDateString()
+    var forecastIcon= document.querySelector('.forecastIcon' + i)
+    var icon= current.weather[0].icon
+    forecastIcon.src= 'http://openweathermap.org/img/wn/' + icon + '@2x.png'
     var forecastTemp = document.querySelector('.forecastTemp' + i)
     forecastTemp.textContent ='Temp: ' + Math.round(current.temp.day) + String.fromCharCode(176) + ' F';
     var forecastWind = document.querySelector('.forecastWind' + i)
    forecastWind.textContent= 'Wind: ' + current.wind_speed + ' MPH'
-    var forecastHumidity = document.querySelector('.forecastHumidity'+ i)
-    forecastHumidity = 'Humidity: ' + current.humidity + '%'
+    var forecastHumidity = document.querySelector('.forecastHumidity' + i)
+    forecastHumidity.textContent = 'Humidity: ' + current.humidity + '%'
+    console.log(forecastHumidity)
+    
   }
 
 })
@@ -130,3 +145,4 @@ displayCurrentWeather();
 
 
 })
+
