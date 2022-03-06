@@ -1,3 +1,5 @@
+
+
 .app-title {
     color: white;
     background: linear-gradient(to right,blue, darkblue);
@@ -35,6 +37,18 @@
 
  }
 
+#current-day-container {
+    border: none !important;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+}
+#current-day-container img {
+    display: flex;
+    justify-content: flex-start;
+    width: 150px;
+}
 
 .border {
     border: solid 1px ;
@@ -54,6 +68,7 @@ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
 
 .green {
     background-color:green;
+
 }
 
 .forecast-card {
@@ -61,4 +76,35 @@ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
     font-weight: bold;
     color: white;
     padding: 10px;
+}
+#cityListContainer {
+    border: none;
+}
+.cityButtons {
+    border: none;
+}
+#city-name {
+    width: 100%;
+
+}
+@media (max-width: 820px) {
+    #submit, button {
+        padding: 10px 5px 10px 5px;
+        width: 100%;
+    }
+    #city-name {
+        width: 75px;
+    }
+}
+
+@media (max-width: 570px) {
+    .card-header {
+        font-size: 24px;
+        display: flex; 
+    }
+    #submit, button {
+        display: flex;
+        justify-content: center;
+        padding: 10px 75px;
+    }   
 }
