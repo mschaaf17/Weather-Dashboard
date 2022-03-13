@@ -2,7 +2,7 @@
 var submitBtn = document.getElementById('submit');
 var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
 var apiKey = '&appid=cf161441982aff595bf2e110785325f0'; 
-var units = '&units=imperial';
+//var units = '&units=imperial';
 var currentWeather = document.getElementById('current-day-container')
 var citiesSearched = !!localStorage.getItem('citiesSearched') ? JSON.parse(localStorage.getItem('citiesSearched')) : [];
 var cityListContainer = document.getElementById('cityListContainer');
@@ -22,7 +22,7 @@ recentSearches()
 
 // function to set up url for search
  var citySearched = function(e) {
-  var inputEl = document.querySelector('#city-name').value.trim();
+ // var inputEl = document.querySelector('#city-name').value.trim();
   event.preventDefault(); 
   var currentUrl = api + inputEl + apiKey + units;
   console.log(currentUrl)
