@@ -103,7 +103,7 @@ var futureWeather = function (lat, lon) {
       } else if (uvData <= 2) {
         uvEl.style.backgroundColor = 'green';
       };
-      if (uvData === 3 || uvData === 4 || uvData === 5) {
+      if (uvData >= 3 && uvData <=5) {
         uvEl.style.backgroundColor = 'yellow'
       };
       var forecastTitle = document.getElementById('forecastTitle')
